@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is form page</title>
+</head>
+<body>
+    <h1>CV builder</h1>
+    <form method="POST" action='fill_details' class="form">
+        {% csrf_token %}
+        <div class="name"><label>First Name</label> <input type="text" name="firstname" value="" placeholder="first name"></div>
+        <div class="name"><label>Last Name</label> <input type="text" name="lastname" value="" placeholder="last name"></div>
+        <div class="name"><label>Stream</label> <input type="text" name="stream" value="" placeholder="eg:web developer"></div>
+        <div class="name"><label>Objective</label><input type="text" name="objective" value="" placeholder="write about something about you"></div>
+        <div class="name"><label>Phone num</label><input type="text" name="phone" value="" placeholder="eg:0000011111"></div>
+        <div class="name"><label>Email</label><input type="email" name="mail" value="" placeholder="abc123@gmail.com"></div>
+        <div class="name"><label>Address</label><input type="address" name="address" value="" placeholder="streetname,cityname"></div>
+
+        <div class="name"><label>Skills</label><input type="number" name="skills" value="" id="skills" oninput="createListItems()" placeholder="give in number"></div>
+        <ul class="skill_lists" id="skill_lists"></ul>
+        <div class="languages"><label>Languages</label><input type="number" name="languages" value="" id="languages" oninput="createLangItems()" placeholder="give in number"></div>
+        <ul class="lang_lists" id="lang_lists"></ul>
+
+        <div class="certifications"><label>Add Your Certificates</label><input type="number" name="certificates" value="" id="certifications" placeholder="enter number of certificates" oninput="addcertificates()"></div>
+        <ul class="certificate" id="certificate"></ul>
+        <div class="projects"><label>Add Your Projects</label><input type="number" name="projects" value="" id="projects" placeholder="enter number of projects" oninput="addprojects()"></div>
+        <ul class="project" id="project"></ul>
+        
+        <div class="name"><label>Enter Degree</label><input type="text" name="degree" value="" placeholder="BA/BTech/Bsc"></div>
+        <div class="name"><label>University</label> <input type="text" name="college" value="" placeholder="college_name,city"></div>
+        <div class="name"><label>Year Of Graduation</label><input type="number" name="year" value="" placeholder="enter year"></div>
+
+        <div class="name"><label>College/University average percentile</label><input type="number" name="u_percentile" value="" placeholder="eg:87.5"></div>
+        <div class="name"><label>Intermediate average percentile</label><input type="number" name="inter_percentile" value="" placeholder="eg:90.0"></div>
+        <div class="name"><label>10th class percentile</label><input type="number" name="tenth_percentile" value="" placeholder="eg:10"></div>
+        <input type="submit" value="submit">
+    </form>
+</body>
+<script>
+    function addprojects(){
+        var num = parseInt(document.getElementById("projects").value);
+        var listContainer = document.getElementById("project");
+
+        listContainer.innerHTML="";
+        for(var i=0;i<num;i++){
+            var label = document.createElement("label");
+            label.textContent="project"+(i+1)+":";
+            listContainer.appendChild(label);
+            var input= document.createElement("input");
+            input.type="text";
+            input.name="project"+i;
+            listContainer.appendChild(input);
+            listContainer.appendChild(document.createElement("br"));
+        }
+    }
+    function addcertificates(){
+        var num = parseInt(document.getElementById("certifications").value);
+        var listContainer = document.getElementById("certificate");
+
+        listContainer.innerHTML="";
+        for(var i=0;i<num;i++){
+            var label = document.createElement("label");
+            label.textContent="certificate"+(i+1)+":";
+            listContainer.appendChild(label);
+            var input= document.createElement("input");
+            input.type="text";
+            input.name="certificate"+i;
+            listContainer.appendChild(input);
+            listContainer.appendChild(document.createElement("br"));
+        }
+    }
+    function createLangItems(){
+        var num = parseInt(document.getElementById("languages").value);
+        var listContainer = document.getElementById("lang_lists");
+
+        listContainer.innerHTML="";
+        for(var i=0;i<num;i++){
+            var label = document.createElement("label");
+            label.textContent="Language"+(i+1)+":";
+            listContainer.appendChild(label);
+            var input= document.createElement("input");
+            input.type="text";
+            input.name="lang"+i;
+            listContainer.appendChild(input);
+            listContainer.appendChild(document.createElement("br"));
+        }
+    }
+    function createListItems(){
+        var num=parseInt(document.getElementById("skills").value);
+        var listContainer = document.getElementById("skill_lists");
+
+        listContainer.innerHTML="";
+        for(var i=0;i<num;i++){
+            var label = document.createElement("label");
+            label.textContent="Skill"+(i+1)+":";
+            listContainer.appendChild(label);
+            var input= document.createElement("input");
+            input.type="text";
+            listContainer.appendChild(input);
+            listContainer.appendChild(document.createElement("br"));
+        }
+    }
+</script>
+</html>
